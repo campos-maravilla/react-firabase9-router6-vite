@@ -4,16 +4,9 @@ import Login from "./routes/Login";
 import Register from "./routes/Register";
 import Navbar from "./components/Navbar";
 import RequireAuth from "./components/RequireAuth";
-import { useContext } from "react";
-import { UserContext } from "./context/UserProvider";
 
 
 const App = () => {
-
-  const { user } = useContext(UserContext)
-  if (user === false) {
-    return <p>Loading...</p>
-  }
   return (
     <>
       <Navbar />

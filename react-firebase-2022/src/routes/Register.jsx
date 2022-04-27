@@ -1,32 +1,32 @@
 import React, { useContext, useState } from 'react'
-import { useNavigate } from 'react-router'
-import { UserContext } from '../context/UserProvider'
+import { useNavigate } from 'react-router';
+import { UserContext } from '../context/UserProvider';
 
-const Login = () => {
+const Register = () => {
 
     const [email, setEmail] = useState('mauromaravilla@gmail.com');
     const [password, setPassword] = useState('123123')
 
-    const { loginUser } = useContext(UserContext)
-
     const navegate = useNavigate();
+
+    const { registerUser } = useContext(UserContext);
 
     const handlerSubmit = async (e) => {
         e.preventDefault();
         console.log('procesando form: ', email, password);
         try {
-            await loginUser(email, password);
-            console.log('Usuario logueado');
+            await registerUser(email, password);
+            console.log('Usuario creado');
             navegate("/")
         } catch (error) {
             console.log(error.code);
-
+            alert('Este email ya esta registrado')
         }
     }
 
     return (
-        <div>
-            <h1>Login</h1>
+        <>
+            <h1>Register</h1>
             <form onSubmit={handlerSubmit}>
                 <input type="email"
                     placeholder="Ingrese email"
@@ -38,10 +38,10 @@ const Login = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <button type="submit">Login</button>
+                <button type="submit">Register</button>
             </form>
-        </div>
+        </>
     )
 }
 
-export default Login
+export default Register
